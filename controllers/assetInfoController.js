@@ -3,7 +3,7 @@ import { initAssetInfo } from "../scripts/assetInfo.js";
 export const assetInfo = async (req, res, next) => {
   try {
     //Get user input
-    const { address } = req.body;
+    const { address } = req.query;
     if (!address) {
       res.status(400).json({
         status: "failed",

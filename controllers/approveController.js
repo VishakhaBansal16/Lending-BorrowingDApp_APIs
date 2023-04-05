@@ -1,17 +1,18 @@
-import { initBorrow } from "../scripts/borrow.js";
+import createError from "http-errors";
+import { initApprove } from "../scripts/approve.js";
 
-export const borrowAsset = async (req, res, next) => {
+export const approve = async (req, res, next) => {
   try {
     //Get user input
-    const { asset, amount } = req.body;
-    if (!(asset, amount)) {
+    const { spender, value } = req.body;
+    if (!(spender, value)) {
       res.status(400).json({
         status: "failed",
         message: "All inputs are required",
       });
     }
 
-    const unsignedTransactionObject = await initBorrow(asset, amount);
+    const unsignedTransactionObject = await initApprove(spender, value);
 
     if (!unsignedTransactionObject) {
       throw createError(404, "Not Found");

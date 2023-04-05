@@ -1,25 +1,25 @@
 import createError from "http-errors";
-import { initTxnStatus } from "../scripts/transactionStatus.js";
+import { initBalance } from "../scripts/userBalance.js";
 
-export const transactionStatus = async (req, res, next) => {
+export const userBalance = async (req, res, next) => {
   try {
     //Get user input
-    const { txHash } = req.query;
-    if (!txHash) {
+    const { address } = req.body;
+    if (!address) {
       res.status(400).json({
         status: "failed",
         message: "An input is required",
       });
     }
 
-    const transactionStatus = await initTxnStatus(txHash);
+    const userBalance = await initBalance(address);
 
-    if (!transactionStatus) {
+    if (!userBalance) {
       throw createError(404, "Not Found");
     }
 
     res.status(201).json({
-      transactionStatus,
+      userBalance,
     });
   } catch (err) {
     console.log(err);
