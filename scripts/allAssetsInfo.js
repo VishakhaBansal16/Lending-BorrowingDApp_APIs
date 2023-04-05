@@ -2,7 +2,7 @@ import dotenv from "dotenv/config";
 import { ethers } from "ethers";
 import { implementationABI } from "../implementationABI.js";
 
-export const initAssetInfo = async (address) => {
+export const initAllAssetsInfo = async () => {
   const alchemyUrl = process.env.ALCHEMY_URL;
   const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
 
@@ -15,10 +15,6 @@ export const initAssetInfo = async (address) => {
     provider
   );
 
-  const responseArray = await implementationContract.getAssetInfoByAddress(
-    address
-  );
-
   const propertyNames = [
     "offset",
     "asset",
@@ -29,14 +25,21 @@ export const initAssetInfo = async (address) => {
     "liquidationFactor",
     "supplyCap",
   ];
-  const responseObject = responseArray.reduce((obj, value, index) => {
-    if (typeof value == "object" || value.type == "BigNumber") {
-      obj[propertyNames[index]] = parseInt(value, 10);
-    } else {
-      obj[propertyNames[index]] = value;
-    }
-    return obj;
-  }, {});
+  let responseObject;
+  const result = [];
+  //getting details of all 4 listed assets
+  for (let numAsset = 0; numAsset < 4; numAsset++) {
+    const responseArray = await implementationContract.getAssetInfo(numAsset);
+    responseObject = responseArray.reduce((obj, value, index) => {
+      if (typeof value == "object" || value.type == "BigNumber") {
+        obj[propertyNames[index]] = parseInt(value, 10);
+      } else {
+        obj[propertyNames[index]] = value;
+      }
+      return obj;
+    }, {});
+    result.push(responseObject);
+  }
 
-  return responseObject;
+  return result;
 };

@@ -1,13 +1,11 @@
 import dotenv from "dotenv/config";
 import createError from "http-errors";
-import { db } from "./db/database.js";
-import mongoose from "mongoose";
 import express from "express";
 import { supply_route } from "./routes/supplyRoute.js";
 import { borrow_route } from "./routes/borrowRoute.js";
 import { txStatus_route } from "./routes/transactionStatusRoute.js";
-import { storage_route } from "./routes/initializeStorageRoute.js";
 import { assetInfo_route } from "./routes/assetInfoRoute.js";
+import { allAssetsInfo_route } from "./routes/allAssetsInfoRoute.js";
 const app = express();
 const port = process.env.API_PORT || 3000;
 app.use(express.json());
@@ -15,8 +13,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/", supply_route);
 app.use("/", borrow_route);
 app.use("/", txStatus_route);
-app.use("/", storage_route);
 app.use("/", assetInfo_route);
+app.use("/", allAssetsInfo_route);
 app.use((req, res, next) => {
   next(createError(404, "Not Found"));
 });

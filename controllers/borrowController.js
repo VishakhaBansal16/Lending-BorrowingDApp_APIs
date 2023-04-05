@@ -11,14 +11,14 @@ export const borrowAsset = async (req, res, next) => {
       });
     }
 
-    const serializedTransactionData = await initBorrow(asset, amount, from);
+    const unsignedTransactionObject = await initBorrow(asset, amount, from);
 
-    if (!serializedTransactionData) {
+    if (!unsignedTransactionObject) {
       throw createError(404, "Not Found");
     }
 
     res.status(201).json({
-      serializedTransactionData,
+      unsignedTransactionObject,
     });
   } catch (err) {
     console.log(err);

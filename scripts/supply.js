@@ -26,13 +26,10 @@ export const initSupply = async (asset, amount, from) => {
     to: proxyContractAddress,
     data: data,
     chainId: 80001,
-    gasPrice: ethers.utils.parseUnits("10", "gwei"),
+    gasPrice: 1000000000,
     gasLimit: 200000,
     nonce: await provider.getTransactionCount(from),
   };
 
-  const serializedTransaction =
-    ethers.utils.serializeTransaction(transactionObject);
-
-  return serializedTransaction;
+  return transactionObject;
 };
