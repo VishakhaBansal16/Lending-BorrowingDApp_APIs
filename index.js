@@ -1,6 +1,7 @@
 import dotenv from "dotenv/config";
 import createError from "http-errors";
 import express from "express";
+import cors from "cors";
 import { supply_route } from "./routes/supplyRoute.js";
 import { borrow_route } from "./routes/borrowRoute.js";
 import { txStatus_route } from "./routes/transactionStatusRoute.js";
@@ -12,6 +13,8 @@ const app = express();
 const port = process.env.API_PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
+app.options("*", cors());
 app.use("/", supply_route);
 app.use("/", borrow_route);
 app.use("/", txStatus_route);
