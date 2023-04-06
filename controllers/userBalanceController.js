@@ -4,7 +4,7 @@ import { initBalance } from "../scripts/userBalance.js";
 export const userBalance = async (req, res, next) => {
   try {
     //Get user input
-    const { address } = req.body;
+    const { address } = req.query;
     if (!address) {
       res.status(400).json({
         status: "failed",
