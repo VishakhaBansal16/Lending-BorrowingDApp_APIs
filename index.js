@@ -9,6 +9,7 @@ import { assetInfo_route } from "./routes/assetInfoRoute.js";
 import { allAssetsInfo_route } from "./routes/allAssetsInfoRoute.js";
 import { userBalance_route } from "./routes/userBalanceRoute.js";
 import { approve_route } from "./routes/approveRoute.js";
+import { allowance_route } from "./routes/allowanceRoute.js";
 const app = express();
 const port = process.env.API_PORT || 3000;
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use("/", assetInfo_route);
 app.use("/", allAssetsInfo_route);
 app.use("/", userBalance_route);
 app.use("/", approve_route);
+app.use("/", allowance_route);
 app.use((req, res, next) => {
   next(createError(404, "Not Found"));
 });
