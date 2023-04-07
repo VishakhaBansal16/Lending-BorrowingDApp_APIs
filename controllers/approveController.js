@@ -5,7 +5,8 @@ export const approve = async (req, res, next) => {
   try {
     //Get user input
     const { asset, value } = req.body;
-    if (!value) {
+
+    if (!(asset, value)) {
       res.status(400).json({
         status: "failed",
         message: "All inputs are required",

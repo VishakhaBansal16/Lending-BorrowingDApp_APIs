@@ -10,7 +10,7 @@ export const initSupply = async (asset, amount) => {
     "0x6Cd33556D458aC78Cc17b55Eb75B17d23E4deE57";
   try {
     const implementationContract = new ethers.Contract(
-      implementationContractAddress,
+      proxyContractAddress,
       implementationABI,
       provider
     );
