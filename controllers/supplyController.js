@@ -18,9 +18,7 @@ export const supplyAsset = async (req, res, next) => {
       throw createError(404, "Not Found");
     }
 
-    res.status(201).json({
-      unsignedTransactionObject,
-    });
+    res.status(201).send(unsignedTransactionObject);
   } catch (err) {
     console.log(err);
     next(err);

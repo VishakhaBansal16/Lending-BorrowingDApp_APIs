@@ -18,9 +18,7 @@ export const transactionStatus = async (req, res, next) => {
       throw createError(404, "Not Found");
     }
 
-    res.status(201).json({
-      transactionStatus,
-    });
+    res.status(201).send(transactionStatus);
   } catch (err) {
     console.log(err);
     next(err);

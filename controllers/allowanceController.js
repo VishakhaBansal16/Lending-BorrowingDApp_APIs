@@ -14,7 +14,7 @@ export const allowance = async (req, res, next) => {
 
     const allowance = await initAllowance(owner, asset);
 
-    res.status(201).json({ allowance });
+    res.status(201).send(allowance);
   } catch (err) {
     console.log(err);
     next(err);

@@ -18,9 +18,7 @@ export const userBalance = async (req, res, next) => {
       throw createError(404, "Not Found");
     }
 
-    res.status(201).json({
-      userBalance,
-    });
+    res.status(201).send(userBalance);
   } catch (err) {
     console.log(err);
     next(err);
