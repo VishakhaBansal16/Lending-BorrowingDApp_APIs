@@ -1,16 +1,15 @@
 import { initAllAssetsInfo } from "../scripts/allAssetsInfo.js";
 
-export const allAssetsInfo = async (req, res, next) => {
+export const allAssetsInfo = async (req, res) => {
   try {
     const result = await initAllAssetsInfo();
 
     if (!result) {
-      throw createError(404, "Not Found");
+      res.send("Page not found");
     }
 
-    res.status(201).send(result);
+    res.send(result);
   } catch (err) {
-    console.log(err);
-    next(err);
+    res.send("Info not found");
   }
 };

@@ -53,6 +53,7 @@
     "has-symbols": "^1.0.3",
     "hash.js": "^1.1.7",
     "hmac-drbg": "^1.0.1",
+    "http": "^0.0.1-security",
     "http-errors": "^2.0.0",
     "iconv-lite": "^0.4.24",
     "ignore-by-default": "^1.0.1",
@@ -127,7 +128,7 @@
     "web3-eth-abi": "^1.9.0",
     "webidl-conversions": "^7.0.0",
     "whatwg-url": "^11.0.0",
-    "ws": "^7.4.6"
+    "ws": "^7.5.9"
   },
   "scripts": {
     "start": "node index.js",

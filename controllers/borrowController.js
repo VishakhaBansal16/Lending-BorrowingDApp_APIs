@@ -1,25 +1,21 @@
 import { initBorrow } from "../scripts/borrow.js";
 
-export const borrowAsset = async (req, res, next) => {
+export const borrowAsset = async (req, res) => {
   try {
     //Get user input
     const { asset, amount } = req.body;
     if (!(asset, amount)) {
-      res.status(400).json({
-        status: "failed",
-        message: "All inputs are required",
-      });
+      res.send("All inputs required");
     }
 
     const unsignedTransactionObject = await initBorrow(asset, amount);
 
     if (!unsignedTransactionObject) {
-      throw createError(404, "Not Found");
+      res.send("Page not found");
     }
 
-    res.status(201).send(unsignedTransactionObject);
+    res.send(unsignedTransactionObject);
   } catch (err) {
-    console.log(err);
-    next(err);
+    res.send("Txn obj not found");
   }
 };

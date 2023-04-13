@@ -1,15 +1,12 @@
 import createError from "http-errors";
 import { BorrowAsset } from "../models/borrowSchema.js";
 
-export const borrowedAsset = async (req, res, next) => {
+export const borrowedAsset = async (req, res) => {
   try {
     //Get user input
     const { asset, amount, from, txHash } = req.body;
     if (!(asset, amount, from, txHash)) {
-      res.status(400).json({
-        status: "failed",
-        message: "All inputs are required",
-      });
+      res.send("All inputs required");
     }
 
     // Create borrowed tokens entry in database
@@ -20,9 +17,8 @@ export const borrowedAsset = async (req, res, next) => {
       txHash,
     });
 
-    res.status(201).send(borrow);
+    res.send(borrow);
   } catch (err) {
-    console.log(err);
-    next(err);
+    res.send("Txn obj not found");
   }
 };

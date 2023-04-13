@@ -1,26 +1,21 @@
-import createError from "http-errors";
 import { initBalance } from "../scripts/userBalance.js";
 
-export const userBalance = async (req, res, next) => {
+export const userBalance = async (req, res) => {
   try {
     //Get user input
     const { address } = req.query;
     if (!address) {
-      res.status(400).json({
-        status: "failed",
-        message: "An input is required",
-      });
+      res.send("An input required");
     }
 
     const userBalance = await initBalance(address);
 
     if (!userBalance) {
-      throw createError(404, "Not Found");
+      res.send("Page not found");
     }
 
-    res.status(201).send(userBalance);
+    res.json({ userBalance });
   } catch (err) {
-    console.log(err);
-    next(err);
+    res.send("User assets balance not found");
   }
 };
