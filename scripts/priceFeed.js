@@ -6,7 +6,7 @@ export const initPriceFeed = async () => {
   const alchemyUrl = process.env.ALCHEMY_URL;
   const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
 
-  const proxyAddress = "0xF09F0369aB0a875254fB565E52226c88f10Bc839";
+  const proxyAddress = "0x96D64580f36138379903F3371f7b4c469Eb53E95";
 
   // try {
   const implementationContract = new ethers.Contract(
