@@ -3,12 +3,12 @@ import { initSupplyInfo } from "../scripts/userSupplyInfo.js";
 export const supplyInfo = async (req, res) => {
   try {
     //Get user input
-    const { asset, amount } = req.body;
-    if (!(asset, amount)) {
+    const { asset, account } = req.query;
+    if (!(asset, account)) {
       res.send("All inputs required");
     }
 
-    const result = await initSupplyInfo(asset, amount);
+    const result = await initSupplyInfo(asset, account);
 
     if (!result) {
       res.send("Page not found");
