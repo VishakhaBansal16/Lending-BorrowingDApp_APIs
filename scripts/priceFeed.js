@@ -8,7 +8,6 @@ export const initPriceFeed = async () => {
 
   const proxyAddress = "0x5D1fd78f04Ac6dAAdC640dE031bd0ec33A5ab511";
 
-  // try {
   const implementationContract = new ethers.Contract(
     proxyAddress,
     LBDappABI,
@@ -21,7 +20,7 @@ export const initPriceFeed = async () => {
   for (let numAsset = 0; numAsset < 4; numAsset++) {
     const responseArray = await implementationContract.getAssetInfo(numAsset);
     const priceFeed = responseArray[2];
-    const price = await implementationContract.getPrice(priceFeed); // 99980000
+    const price = await implementationContract.getCompoundPrice(priceFeed);
 
     const priceInInteger = parseInt(price, 10);
 
