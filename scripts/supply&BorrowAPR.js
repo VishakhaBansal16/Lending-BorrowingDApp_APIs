@@ -1,6 +1,6 @@
 import dotenv from "dotenv/config";
 import { ethers } from "ethers";
-import { implementationABI } from "../ABI/implementationABI.js";
+import { LBDappABI } from "../ABI/LBDappImplABI.js";
 
 export const initSupplyBorrowAPR = async () => {
   const alchemyUrl = process.env.ALCHEMY_URL;
@@ -25,6 +25,6 @@ export const initSupplyBorrowAPR = async () => {
     responseObject.BorrowAPR = borrowAPR;
     return responseObject;
   } catch (err) {
-    return "Supply rate or borrow rate not found";
+    return "Supply APR or borrow APR not found";
   }
 };

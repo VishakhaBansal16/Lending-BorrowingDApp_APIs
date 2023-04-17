@@ -1,6 +1,6 @@
 import dotenv from "dotenv/config";
 import { ethers } from "ethers";
-import { implementationABI } from "../ABI/implementationABI.js";
+import { LBDappABI } from "../ABI/LBDappImplABI.js";
 
 export const initAllAssetsInfo = async () => {
   const alchemyUrl = process.env.ALCHEMY_URL;
