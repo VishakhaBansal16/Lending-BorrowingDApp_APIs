@@ -11,7 +11,7 @@ export const initAllAssetsInfo = async () => {
   try {
     const implementationContract = new ethers.Contract(
       proxyAddress,
-      implementationABI,
+      LBDappABI,
       provider
     );
 

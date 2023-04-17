@@ -11,18 +11,17 @@ export const initSupplyBorrowAPR = async () => {
   try {
     const implementationContract = new ethers.Contract(
       proxyAddress,
-      implementationABI,
+      LBDappABI,
       provider
     );
-    const utilization = await implementationContract.getUtilization();
+
     const responseObject = {};
-    const SecondsPerYear = 60 * 60 * 24 * 365;
-    const supplyRate = await implementationContract.getSupplyRate(utilization);
-    const supplyAPR = (supplyRate / (10 ^ 18)) * SecondsPerYear * 100;
-    responseObject.SupplyAPR = supplyAPR;
-    const borrowRate = await implementationContract.getBorrowRate(utilization);
-    const borrowAPR = (borrowRate / (10 ^ 18)) * SecondsPerYear * 100;
-    responseObject.BorrowAPR = borrowAPR;
+    const supplyAPR = await implementationContract.getSupplyApr();
+    const supplyApr = parseInt(supplyAPR, 10);
+    responseObject.SupplyAPR = supplyApr;
+    const borrowAPR = await implementationContract.getBorrowApr();
+    const borrowApr = parseInt(borrowAPR, 10);
+    responseObject.BorrowAPR = borrowApr;
     return responseObject;
   } catch (err) {
     return "Supply APR or borrow APR not found";

@@ -10,7 +10,7 @@ export const initSupply = async (asset, amount) => {
   try {
     const implementationContract = new ethers.Contract(
       proxyContractAddress,
-      implementationABI,
+      LBDappABI,
       provider
     );
     const methodName = "supply";
