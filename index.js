@@ -20,6 +20,7 @@ import { APR_route } from "./routes/supply&BorrowAPRroute.js";
 import { price_route } from "./routes/priceFeedRoute.js";
 import { supplyInfo_route } from "./routes/userSupplyInfoRoute.js";
 import { borrowInfo_route } from "./routes/userBorrowInfoRoute.js";
+import { withdrawableAmount_route } from "./routes/withdrawableAmountRoute.js";
 
 const app = express();
 const port = process.env.API_PORT || 3000;
@@ -42,6 +43,8 @@ app.use("/", APR_route);
 app.use("/", price_route);
 app.use("/", supplyInfo_route);
 app.use("/", borrowInfo_route);
+app.use("/", withdrawableAmount_route);
+
 // server listening
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
