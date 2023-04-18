@@ -14,7 +14,7 @@ export const supplyInfo = async (req, res) => {
       res.send("Page not found");
     }
 
-    res.send(result);
+    res.json({ result });
   } catch (err) {
     res.send("Txn obj not found");
   }
