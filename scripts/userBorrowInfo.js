@@ -13,20 +13,20 @@ export const initBorrowInfo = async (account) => {
     LBDappABI,
     provider
   );
+  const propertyNames = ["borrowAmount", "lastAccureTime", "interestAmount"];
   let responseObject;
   const resultantArray = [];
   const resultantObject = {};
   const array = await implementationContract.userBorrowInfo(account);
   //getting details of user like borrowAmount, lastAccureTime, interestAmount
-  for (let i = 0; i <= 2; i++) {
-    responseObject = array.reduce((obj, value) => {
-      obj = parseInt(value, 10);
-      return obj;
-    }, {});
-    resultantArray.push(responseObject);
-  }
-  resultantObject.borrowAmount = resultantArray[0];
-  resultantObject.lastAccureTime = resultantArray[1];
-  resultantObject.interestAmount = resultantArray[2];
+  responseObject = array.reduce((obj, value, index) => {
+    obj[propertyNames[index]] = parseInt(value, 10);
+    return obj;
+  }, {});
+  resultantArray.push(responseObject);
+
+  resultantObject.borrowAmount = resultantArray[0].borrowAmount;
+  resultantObject.lastAccureTime = resultantArray[0].lastAccureTime;
+  resultantObject.interestAmount = resultantArray[0].interestAmount;
   return resultantObject;
 };

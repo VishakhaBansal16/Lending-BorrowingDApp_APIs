@@ -2,7 +2,7 @@ import dotenv from "dotenv/config";
 import { ethers } from "ethers";
 import { LBDappABI } from "../ABI/LBDappImplABI.js";
 
-export const initBorrow = async (asset, amount) => {
+export const initWithdraw = async (asset, amount) => {
   const alchemyUrl = process.env.ALCHEMY_URL;
   const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
   const proxyContractAddress = "0x5D1fd78f04Ac6dAAdC640dE031bd0ec33A5ab511";
@@ -13,7 +13,7 @@ export const initBorrow = async (asset, amount) => {
       LBDappABI,
       provider
     );
-    const methodName = "borrow";
+    const methodName = "withdraw";
     const params = [asset, amount];
 
     const data = implementationContract.interface.encodeFunctionData(

@@ -13,21 +13,20 @@ export const initSupplyInfo = async (asset, account) => {
     LBDappABI,
     provider
   );
-
+  const propertyNames = ["depositAmount", "supplyAmount", "lastAccureTime"];
   let responseObject;
   const resultantArray = [];
   const resultantObject = {};
   const array = await implementationContract.userTokenInfo(asset, account);
+
   //getting details of user like depositAmount, supplyAmount, lastAccureTime
-  for (let i = 0; i <= 2; i++) {
-    responseObject = array.reduce((obj, value) => {
-      obj = parseInt(value, 10);
-      return obj;
-    }, {});
-    resultantArray.push(responseObject);
-  }
-  resultantObject.depositAmount = resultantArray[0];
-  resultantObject.supplyAmount = resultantArray[1];
-  resultantObject.lastAccureTime = resultantArray[2];
+  responseObject = array.reduce((obj, value, index) => {
+    obj[propertyNames[index]] = parseInt(value, 10);
+    return obj;
+  }, {});
+  resultantArray.push(responseObject);
+  resultantObject.depositAmount = resultantArray[0].depositAmount;
+  resultantObject.supplyAmount = resultantArray[0].supplyAmount;
+  resultantObject.lastAccureTime = resultantArray[0].lastAccureTime;
   return resultantObject;
 };
