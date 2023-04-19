@@ -31,7 +31,7 @@ export const initApprove = async (asset, value) => {
       provider
     );
 
-    const spender = "0x6Cd33556D458aC78Cc17b55Eb75B17d23E4deE57"; //implementation contract address
+    const spender = "0x5D1fd78f04Ac6dAAdC640dE031bd0ec33A5ab511"; //proxy contract address
     const methodName = "approve";
     const params = [spender, value];
 

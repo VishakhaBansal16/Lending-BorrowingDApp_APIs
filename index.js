@@ -14,13 +14,15 @@ import { allAssetsInfo_route } from "./routes/allAssetsInfoRoute.js";
 import { userBalance_route } from "./routes/userBalanceRoute.js";
 import { approve_route } from "./routes/approveRoute.js";
 import { allowance_route } from "./routes/allowanceRoute.js";
-import { suppliedAsset_route } from "./routes/suppliedAssetRoute.js";
-import { borrowedAsset_route } from "./routes/borrowedAssetRoute.js";
+import { txnDetails_route } from "./routes/txnDetailsRoute.js";
 import { APR_route } from "./routes/supply&BorrowAPRroute.js";
 import { price_route } from "./routes/priceFeedRoute.js";
 import { supplyInfo_route } from "./routes/userSupplyInfoRoute.js";
 import { borrowInfo_route } from "./routes/userBorrowInfoRoute.js";
 import { withdrawableAmount_route } from "./routes/withdrawableAmountRoute.js";
+import { borrowableAmount_route } from "./routes/borrowableAmountRoute.js";
+import { borrowInfoSchema_route } from "./routes/userBorrowInfoSchemaRoute.js";
+import { tokenInfoSchema_route } from "./routes/userTokenInfoSchemaRoute.js";
 
 const app = express();
 const port = process.env.API_PORT || 3000;
@@ -37,13 +39,15 @@ app.use("/", allAssetsInfo_route);
 app.use("/", userBalance_route);
 app.use("/", approve_route);
 app.use("/", allowance_route);
-app.use("/", suppliedAsset_route);
-app.use("/", borrowedAsset_route);
+app.use("/", txnDetails_route);
 app.use("/", APR_route);
 app.use("/", price_route);
 app.use("/", supplyInfo_route);
 app.use("/", borrowInfo_route);
 app.use("/", withdrawableAmount_route);
+app.use("/", borrowableAmount_route);
+app.use("/", borrowInfoSchema_route);
+app.use("/", tokenInfoSchema_route);
 
 // server listening
 app.listen(port, () => {
