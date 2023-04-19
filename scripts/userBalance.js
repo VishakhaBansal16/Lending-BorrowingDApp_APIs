@@ -31,19 +31,24 @@ export const initBalance = async (address) => {
     const balanceArray = [];
     const daiBalance = await daiContract.balanceOf(address);
     const daiBalanceInDecimal = parseInt(daiBalance, 10);
-    balanceArray.push(daiBalanceInDecimal); //adding a named element
+    const _daiBalance = daiBalanceInDecimal / 10 ** 18;
+    balanceArray.push(_daiBalance);
     const wethBalance = await wethContract.balanceOf(address);
     const wethBalanceInDecimal = parseInt(wethBalance, 10);
-    balanceArray.push(wethBalanceInDecimal);
+    const _wethBalance = wethBalanceInDecimal / 10 ** 18;
+    balanceArray.push(_wethBalance);
     const wbtcBalance = await wbtcContract.balanceOf(address);
     const wbtcBalanceInDecimal = parseInt(wbtcBalance, 10);
-    balanceArray.push(wbtcBalanceInDecimal);
+    const _wbtcBalance = wbtcBalanceInDecimal / 10 ** 8;
+    balanceArray.push(_wbtcBalance);
     const wmaticBalance = await wmaticContract.balanceOf(address);
     const wmaticBalanceInDecimal = parseInt(wmaticBalance, 10);
-    balanceArray.push(wmaticBalanceInDecimal);
+    const _wmaticBalance = wmaticBalanceInDecimal / 10 ** 18;
+    balanceArray.push(_wmaticBalance);
     const usdcBalance = await usdcContract.balanceOf(address);
     const usdcBalanceInDecimal = parseInt(usdcBalance, 10);
-    balanceArray.push(usdcBalanceInDecimal);
+    const _usdcBalance = usdcBalanceInDecimal / 10 ** 6;
+    balanceArray.push(_usdcBalance);
 
     const propertyNames = [
       "0x4DAFE12E1293D889221B1980672FE260Ac9dDd28",

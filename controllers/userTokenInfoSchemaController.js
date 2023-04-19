@@ -10,12 +10,12 @@ export const tokenInfo = async (req, res) => {
     }
 
     const details = await initTokenInfoSchema(asset, account);
-    // Create userBorrowInfo details entry in database
-    const entry = await BorrowInfo.create({
+    // Create userTokenInfo details entry in database
+    const entry = await TokenInfo.create({
       asset,
       account,
       depositAmount: details.depositAmount,
-      supplyAmount: details.supplyAmunt,
+      supplyAmount: details.supplyAmount,
       lastAccureTime: details.lastAccureTime,
     });
 

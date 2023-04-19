@@ -23,7 +23,7 @@ import { withdrawableAmount_route } from "./routes/withdrawableAmountRoute.js";
 import { borrowableAmount_route } from "./routes/borrowableAmountRoute.js";
 import { borrowInfoSchema_route } from "./routes/userBorrowInfoSchemaRoute.js";
 import { tokenInfoSchema_route } from "./routes/userTokenInfoSchemaRoute.js";
-
+import { repayBorrow_route } from "./routes/repayBorrowRoute.js";
 const app = express();
 const port = process.env.API_PORT || 3000;
 app.use(express.json());
@@ -48,6 +48,7 @@ app.use("/", withdrawableAmount_route);
 app.use("/", borrowableAmount_route);
 app.use("/", borrowInfoSchema_route);
 app.use("/", tokenInfoSchema_route);
+app.use("/", repayBorrow_route);
 
 // server listening
 app.listen(port, () => {
