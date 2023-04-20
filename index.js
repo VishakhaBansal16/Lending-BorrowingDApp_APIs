@@ -1,6 +1,6 @@
 import dotenv from "dotenv/config";
-import { db } from "./db/database.js";
-import mongoose from "mongoose";
+//import { db } from "./db/database.js";
+//import mongoose from "mongoose";
 import express from "express";
 //import http from "http";
 //import WebSocket from "ws";
@@ -24,6 +24,7 @@ import { borrowableAmount_route } from "./routes/borrowableAmountRoute.js";
 import { borrowInfoSchema_route } from "./routes/userBorrowInfoSchemaRoute.js";
 import { tokenInfoSchema_route } from "./routes/userTokenInfoSchemaRoute.js";
 import { repayBorrow_route } from "./routes/repayBorrowRoute.js";
+import { borrowBalance_route } from "./routes/borrowBalanceRoute.js";
 const app = express();
 const port = process.env.API_PORT || 3000;
 app.use(express.json());
@@ -49,7 +50,7 @@ app.use("/", borrowableAmount_route);
 app.use("/", borrowInfoSchema_route);
 app.use("/", tokenInfoSchema_route);
 app.use("/", repayBorrow_route);
-
+app.use("/", borrowBalance_route);
 // server listening
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
