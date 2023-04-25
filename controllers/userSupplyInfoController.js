@@ -17,7 +17,7 @@ export const supplyInfo = async (req, res) => {
         supplyAmount: tokenInfo.supplyAmount,
         lastAccureTime: tokenInfo.lastAccureTime,
       };
-      res.send(result);
+      res.json({ result });
     } else {
       res.send("Supply info not found in database");
     }

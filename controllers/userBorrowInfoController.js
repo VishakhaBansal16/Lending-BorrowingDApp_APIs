@@ -17,7 +17,7 @@ export const borrowInfo = async (req, res) => {
         lastAccureTime: borrowInfo.lastAccureTime,
         interestAmount: borrowInfo.interestAmount,
       };
-      res.send(result);
+      res.json({ result });
     } else {
       res.send("Borrow info not found in database");
     }

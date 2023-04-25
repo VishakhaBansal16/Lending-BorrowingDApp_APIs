@@ -24,6 +24,7 @@ export const events = async () => {
     });
     console.log(details);
     const result = await initSupplyInfo(asset, user);
+    console.log(result);
     const filter = { asset: asset, account: user };
     const tokenInfo = await TokenInfo.findOne(filter);
     if (tokenInfo) {
