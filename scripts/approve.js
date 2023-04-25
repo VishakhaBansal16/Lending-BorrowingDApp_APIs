@@ -1,51 +1,27 @@
 import dotenv from "dotenv/config";
 import { ethers } from "ethers";
-import { DAI_ABI } from "../ABI/DAI_ABI.js";
-import { WETH_ABI } from "../ABI/WETH_ABI.js";
-import { WBTC_ABI } from "../ABI/WBTC_ABI.js";
-import { WMATIC_ABI } from "../ABI/WMATIC_ABI.js";
-import { usdcImplementationABI } from "../ABI/usdcImplementationABI.js";
+import { assetsABI } from "../ABI/assetsABI.js";
 
 export const initApprove = async (asset, value) => {
   const alchemyUrl = process.env.ALCHEMY_URL;
   const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
-  const daiAddress = "0x4DAFE12E1293D889221B1980672FE260Ac9dDd28";
-  const wethAddress = "0xE1e67212B1A4BF629Bdf828e08A3745307537ccE";
-  const wbtcAddress = "0x4B5A0F4E00bC0d6F16A593Cae27338972614E713";
-  const wmaticAddress = "0xfec23a9E1DBA805ADCF55E0338Bf5E03488FC7Fb";
-  const usdcProxyAddress = "0xDB3cB4f2688daAB3BFf59C24cC42D4B6285828e9";
-  const usdcImplementationAddress =
-    "0x984682e62f2D277969c381815F607bCBf1511bDD";
   try {
-    const daiContract = new ethers.Contract(daiAddress, DAI_ABI, provider);
-    const wethContract = new ethers.Contract(wethAddress, WETH_ABI, provider);
-    const wbtcContract = new ethers.Contract(wbtcAddress, WBTC_ABI, provider);
-    const wmaticContract = new ethers.Contract(
-      wmaticAddress,
-      WMATIC_ABI,
-      provider
-    );
-    const usdcContract = new ethers.Contract(
-      usdcProxyAddress,
-      usdcImplementationABI,
-      provider
-    );
-
+    const contract = new ethers.Contract(asset, assetsABI, provider);
     const spender = "0x39872F03eCCF551eCe1E7049bAB7003E6cc22BcC"; //proxy contract address
-    if (asset == "0x4DAFE12E1293D889221B1980672FE260Ac9dDd28") {
+    if (asset == "0x3587b2F7E0E2D6166d6C14230e7Fe160252B0ba4") {
       value = value * 10 ** 18;
     }
-    if (asset == "0xDB3cB4f2688daAB3BFf59C24cC42D4B6285828e9") {
-      value = value * 10 ** 6;
-    }
-    if (asset == "0xE1e67212B1A4BF629Bdf828e08A3745307537ccE") {
-      value = value * 10 ** 18;
-    }
-    if (asset == "0x4B5A0F4E00bC0d6F16A593Cae27338972614E713") {
+    if (asset == "0xAAD4992D949f9214458594dF92B44165Fb84dC19") {
       value = value * 10 ** 8;
     }
-    if (asset == "0xfec23a9E1DBA805ADCF55E0338Bf5E03488FC7Fb") {
+    if (asset == "0x42a71137C09AE83D8d05974960fd607d40033499") {
       value = value * 10 ** 18;
+    }
+    if (asset == "0xaf95Ff5fB592646D86BF240B3CaE0903b6E4dd38") {
+      value = value * 10 ** 18;
+    }
+    if (asset == "0x07865c6E87B9F70255377e024ace6630C1Eaa37F") {
+      value = value * 10 ** 6;
     }
     const _value = Number(value).toLocaleString("fullwide", {
       useGrouping: false,
@@ -53,77 +29,16 @@ export const initApprove = async (asset, value) => {
     const methodName = "approve";
     const params = [spender, _value];
 
-    if (asset === daiAddress) {
-      const data = daiContract.interface.encodeFunctionData(methodName, params);
-      const transactionObject = {
-        to: daiAddress,
-        data: data,
-        chainId: 80001,
-        gasPrice: 1000000000,
-        gasLimit: 200000,
-        nonce: 0,
-      };
-      return transactionObject;
-    } else if (asset === wethAddress) {
-      const data = wethContract.interface.encodeFunctionData(
-        methodName,
-        params
-      );
-      const transactionObject = {
-        to: wethAddress,
-        data: data,
-        chainId: 80001,
-        gasPrice: 1000000000,
-        gasLimit: 200000,
-        nonce: 0,
-      };
-      return transactionObject;
-    } else if (asset === wbtcAddress) {
-      const data = wbtcContract.interface.encodeFunctionData(
-        methodName,
-        params
-      );
-      const transactionObject = {
-        to: wbtcAddress,
-        data: data,
-        chainId: 80001,
-        gasPrice: 1000000000,
-        gasLimit: 200000,
-        nonce: 0,
-      };
-      return transactionObject;
-    } else if (asset === wmaticAddress) {
-      const data = wmaticContract.interface.encodeFunctionData(
-        methodName,
-        params
-      );
-      const transactionObject = {
-        to: wmaticAddress,
-        data: data,
-        chainId: 80001,
-        gasPrice: 1000000000,
-        gasLimit: 200000,
-        nonce: 0,
-      };
-      return transactionObject;
-    } else if (asset === usdcProxyAddress) {
-      const data = usdcContract.interface.encodeFunctionData(
-        methodName,
-        params
-      );
-
-      const transactionObject = {
-        to: usdcProxyAddress,
-        data: data,
-        chainId: 80001,
-        gasPrice: 1000000000,
-        gasLimit: 200000,
-        nonce: 0,
-      };
-      return transactionObject;
-    } else {
-      return "Invalid asset address";
-    }
+    const data = contract.interface.encodeFunctionData(methodName, params);
+    const transactionObject = {
+      to: asset,
+      data: data,
+      chainId: 5,
+      gasPrice: 1000000000,
+      gasLimit: 200000,
+      nonce: 0,
+    };
+    return transactionObject;
   } catch (err) {
     return "Transaction object not found";
   }

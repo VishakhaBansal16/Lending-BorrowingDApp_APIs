@@ -13,7 +13,7 @@ export const initRepayBorrow = async (baseAsset, amount) => {
       LBDappABI,
       provider
     );
-    if (baseAsset == "0xDB3cB4f2688daAB3BFf59C24cC42D4B6285828e9") {
+    if (baseAsset == "0x07865c6E87B9F70255377e024ace6630C1Eaa37F") {
       amount = amount * 10 ** 6;
     }
     const _amount = Number(amount).toLocaleString("fullwide", {

@@ -8,12 +8,12 @@ export const initBorrowableAmount = async (account) => {
   const proxyContractAddress = "0x39872F03eCCF551eCe1E7049bAB7003E6cc22BcC";
 
   try {
-    const implementationContract = new ethers.Contract(
+    const contract = new ethers.Contract(
       proxyContractAddress,
       LBDappABI,
       provider
     );
-    const amount = await implementationContract.getBorrowableAmount(account);
+    const amount = await contract.getBorrowableAmount(account);
     const borrowableAmount = parseInt(amount, 10);
 
     return borrowableAmount;

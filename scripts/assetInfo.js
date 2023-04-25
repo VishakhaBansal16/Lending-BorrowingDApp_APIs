@@ -9,15 +9,9 @@ export const initAssetInfo = async (address) => {
   const proxyAddress = "0x39872F03eCCF551eCe1E7049bAB7003E6cc22BcC";
 
   try {
-    const implementationContract = new ethers.Contract(
-      proxyAddress,
-      LBDappABI,
-      provider
-    );
+    const contract = new ethers.Contract(proxyAddress, LBDappABI, provider);
 
-    const responseArray = await implementationContract.getAssetInfoByAddress(
-      address
-    );
+    const responseArray = await contract.getAssetInfoByAddress(address);
 
     const propertyNames = [
       "offset",

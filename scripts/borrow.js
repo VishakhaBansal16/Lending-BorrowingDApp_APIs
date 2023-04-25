@@ -8,26 +8,26 @@ export const initBorrow = async (asset, amount) => {
   const proxyContractAddress = "0x39872F03eCCF551eCe1E7049bAB7003E6cc22BcC";
 
   try {
-    const implementationContract = new ethers.Contract(
+    const contract = new ethers.Contract(
       proxyContractAddress,
       LBDappABI,
       provider
     );
 
-    if (asset == "0x4DAFE12E1293D889221B1980672FE260Ac9dDd28") {
+    if (asset == "0x3587b2F7E0E2D6166d6C14230e7Fe160252B0ba4") {
       amount = amount * 10 ** 18;
     }
-    if (asset == "0xDB3cB4f2688daAB3BFf59C24cC42D4B6285828e9") {
-      amount = amount * 10 ** 6;
-    }
-    if (asset == "0xE1e67212B1A4BF629Bdf828e08A3745307537ccE") {
-      amount = amount * 10 ** 18;
-    }
-    if (asset == "0x4B5A0F4E00bC0d6F16A593Cae27338972614E713") {
+    if (asset == "0xAAD4992D949f9214458594dF92B44165Fb84dC19") {
       amount = amount * 10 ** 8;
     }
-    if (asset == "0xfec23a9E1DBA805ADCF55E0338Bf5E03488FC7Fb") {
+    if (asset == "0x42a71137C09AE83D8d05974960fd607d40033499") {
       amount = amount * 10 ** 18;
+    }
+    if (asset == "0xaf95Ff5fB592646D86BF240B3CaE0903b6E4dd38") {
+      amount = amount * 10 ** 18;
+    }
+    if (asset == "0x07865c6E87B9F70255377e024ace6630C1Eaa37F") {
+      amount = amount * 10 ** 6;
     }
 
     const _amount = Number(amount).toLocaleString("fullwide", {
@@ -36,15 +36,12 @@ export const initBorrow = async (asset, amount) => {
     const methodName = "borrow";
     const params = [asset, _amount];
 
-    const data = implementationContract.interface.encodeFunctionData(
-      methodName,
-      params
-    );
+    const data = contract.interface.encodeFunctionData(methodName, params);
 
     const transactionObject = {
       to: proxyContractAddress,
       data: data,
-      chainId: 80001,
+      chainId: 5,
       gasPrice: 1000000000,
       gasLimit: 200000,
       nonce: 0,
