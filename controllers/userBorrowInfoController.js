@@ -1,4 +1,4 @@
-import { initBorrowInfo } from "../scripts/userBorrowInfo.js";
+import { BorrowInfo } from "../models/userBorrowInfoModel.js";
 
 export const borrowInfo = async (req, res) => {
   try {
@@ -8,13 +8,19 @@ export const borrowInfo = async (req, res) => {
       res.send("An input required");
     }
 
-    const result = await initBorrowInfo(account);
+    const filter = { account: account };
+    const borrowInfo = await BorrowInfo.findOne(filter);
 
-    if (!result) {
-      res.send("Page not found");
+    if (borrowInfo) {
+      const result = {
+        borrowAmount: borrowInfo.borrowAmount,
+        lastAccureTime: borrowInfo.lastAccureTime,
+        interestAmount: borrowInfo.interestAmount,
+      };
+      res.send(result);
+    } else {
+      res.send("Borrow info not found in database");
     }
-
-    res.json({ result });
   } catch (err) {
     res.send("Txn obj not found");
   }

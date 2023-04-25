@@ -28,7 +28,7 @@ export const initPriceFeed = async () => {
       decimalPrice = (priceInInteger / 10 ** 8).toFixed(8);
     }
     if (numAsset == 1) {
-      decimalPrice = (priceInInteger / 10 ** 12).toFixed(12);
+      decimalPrice = (priceInInteger / 10 ** 8).toFixed(8);
     }
     if (numAsset == 2) {
       decimalPrice = (priceInInteger / 10 ** 8).toFixed(8);
@@ -38,6 +38,5 @@ export const initPriceFeed = async () => {
     }
     result.push(decimalPrice);
   }
-
   return result;
 };

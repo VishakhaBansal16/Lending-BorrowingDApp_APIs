@@ -5,7 +5,7 @@ const txnDetailsSchema = new mongoose.Schema({
   asset: { type: String },
   amount: { type: Number },
   from: { type: String },
-  //txHash: { type: String },
+  txHash: { type: String },
 });
 
 export const TxnDetails = mongoose.model("TxnDetails", txnDetailsSchema);

@@ -1,4 +1,4 @@
-import { initSupplyInfo } from "../scripts/userSupplyInfo.js";
+import { TokenInfo } from "../models/userTokenInfoModel.js";
 
 export const supplyInfo = async (req, res) => {
   try {
@@ -8,13 +8,19 @@ export const supplyInfo = async (req, res) => {
       res.send("All inputs required");
     }
 
-    const result = await initSupplyInfo(asset, account);
+    const filter = { asset: asset, account: account };
+    const tokenInfo = await TokenInfo.findOne(filter);
 
-    if (!result) {
-      res.send("Page not found");
+    if (tokenInfo) {
+      const result = {
+        depositAmount: tokenInfo.depositAmount,
+        supplyAmount: tokenInfo.supplyAmount,
+        lastAccureTime: tokenInfo.lastAccureTime,
+      };
+      res.send(result);
+    } else {
+      res.send("Supply info not found in database");
     }
-
-    res.json({ result });
   } catch (err) {
     res.send("Txn obj not found");
   }
