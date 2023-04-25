@@ -6,7 +6,7 @@ export const initSupplyBorrowAPR = async () => {
   const alchemyUrl = process.env.ALCHEMY_URL;
   const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
 
-  const proxyAddress = "0x96D64580f36138379903F3371f7b4c469Eb53E95";
+  const proxyAddress = "0x39872F03eCCF551eCe1E7049bAB7003E6cc22BcC";
 
   try {
     const implementationContract = new ethers.Contract(

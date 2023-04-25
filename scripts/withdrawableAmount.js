@@ -5,7 +5,7 @@ import { LBDappABI } from "../ABI/LBDappImplABI.js";
 export const initWithdrawableAmount = async (account, asset, amount) => {
   const alchemyUrl = process.env.ALCHEMY_URL;
   const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
-  const proxyContractAddress = "0x5D1fd78f04Ac6dAAdC640dE031bd0ec33A5ab511";
+  const proxyContractAddress = "0x39872F03eCCF551eCe1E7049bAB7003E6cc22BcC";
 
   try {
     const implementationContract = new ethers.Contract(

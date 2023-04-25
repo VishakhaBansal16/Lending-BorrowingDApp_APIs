@@ -30,7 +30,7 @@ export const initAllowance = async (owner, asset) => {
       usdcImplementationABI,
       provider
     );
-    const spender = "0x5D1fd78f04Ac6dAAdC640dE031bd0ec33A5ab511"; //proxy contract address
+    const spender = "0x39872F03eCCF551eCe1E7049bAB7003E6cc22BcC"; //proxy contract address
 
     if (asset === daiAddress) {
       const allowance = await daiContract.allowance(owner, spender);
