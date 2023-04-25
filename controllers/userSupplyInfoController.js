@@ -19,7 +19,12 @@ export const supplyInfo = async (req, res) => {
       };
       res.json({ result });
     } else {
-      res.send("Supply info not found in database");
+      const result = {
+        depositAmount: 0,
+        supplyAmount: 0,
+        lastAccureTime: 0,
+      };
+      res.json({ result });
     }
   } catch (err) {
     res.send("Txn obj not found");

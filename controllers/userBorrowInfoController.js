@@ -19,7 +19,12 @@ export const borrowInfo = async (req, res) => {
       };
       res.json({ result });
     } else {
-      res.send("Borrow info not found in database");
+      const result = {
+        borrowAmount: 0,
+        lastAccureTime: 0,
+        interestAmount: 0,
+      };
+      res.json({ result });
     }
   } catch (err) {
     res.send("Txn obj not found");
