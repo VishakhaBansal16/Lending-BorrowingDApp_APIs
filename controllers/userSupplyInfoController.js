@@ -27,6 +27,6 @@ export const supplyInfo = async (req, res) => {
       res.json({ result });
     }
   } catch (err) {
-    res.send("Txn obj not found");
+    res.send("Txn object not found");
   }
 };
