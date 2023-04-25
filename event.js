@@ -9,7 +9,7 @@ import { initBorrowInfo } from "./scripts/userBorrowInfo.js";
 const alchemyUrl = process.env.ALCHEMY_URL;
 const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
 
-const address = "0x5D1fd78f04Ac6dAAdC640dE031bd0ec33A5ab511";
+const address = "0x39872F03eCCF551eCe1E7049bAB7003E6cc22BcC";
 
 const contract = new ethers.Contract(address, LBDappABI, provider);
 export const events = async () => {
