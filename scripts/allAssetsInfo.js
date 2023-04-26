@@ -1,7 +1,7 @@
 import dotenv from "dotenv/config";
 import { ethers } from "ethers";
 import { LBDappABI } from "../ABI/LBDappImplABI.js";
-import { logger } from "./logger.js";
+//import { logger } from "./logger.js";
 export const initAllAssetsInfo = async () => {
   const alchemyUrl = process.env.ALCHEMY_URL;
   const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
@@ -40,9 +40,9 @@ export const initAllAssetsInfo = async () => {
       }, {});
       result.push(responseObject);
     }
-    logger.info("This is an info message from allAssetsInfo.js");
-    logger.warn("This is a warning message from allAssetsInfo.js");
-    logger.error("This is an error message from allAssetsInfo.js");
+    //logger.info("This is an info message from allAssetsInfo.js");
+    // logger.warn("This is a warning message from allAssetsInfo.js");
+    // logger.error("This is an error message from allAssetsInfo.js");
     return result;
   } catch (err) {
     return "Assets info not found";
