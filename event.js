@@ -23,26 +23,25 @@ export const events = async () => {
       txHash: event.transactionHash,
     });
     console.log(details);
-    const result = await initSupplyInfo(asset, user);
-    const filter = { asset: asset, account: user };
+    const result = await initSupplyInfo(user);
+    const filter = { account: user };
     const tokenInfo = await TokenInfo.findOne(filter);
     if (tokenInfo) {
       const update = {
         $set: {
-          depositAmount: result.depositAmount,
-          supplyAmount: result.supplyAmount,
-          lastAccureTime: result.lastAccureTime,
+          wbtcSupplyAmount: result.wbtcSupplyAmount,
+          wethSupplyAmount: result.wethSupplyAmount,
+          linkSupplyAmount: result.linkSupplyAmount,
         },
       };
       const _result = await TokenInfo.updateOne(filter, update);
       console.log(_result);
     } else {
       const info = await TokenInfo.create({
-        asset: asset,
         account: user,
-        depositAmount: result.depositAmount,
-        supplyAmount: result.supplyAmount,
-        lastAccureTime: result.lastAccureTime,
+        wbtcSupplyAmount: result.wbtcSupplyAmount,
+        wethSupplyAmount: result.wethSupplyAmount,
+        linkSupplyAmount: result.linkSupplyAmount,
       });
       console.log(info);
     }
@@ -58,26 +57,25 @@ export const events = async () => {
       txHash: event.transactionHash,
     });
     console.log(details);
-    const result = await initSupplyInfo(asset, user);
-    const filter = { asset: asset, account: user };
+    const result = await initSupplyInfo(user);
+    const filter = { account: user };
     const tokenInfo = await TokenInfo.findOne(filter);
     if (tokenInfo) {
       const update = {
         $set: {
-          depositAmount: result.depositAmount,
-          supplyAmount: result.supplyAmount,
-          lastAccureTime: result.lastAccureTime,
+          wbtcSupplyAmount: result.wbtcSupplyAmount,
+          wethSupplyAmount: result.wethSupplyAmount,
+          linkSupplyAmount: result.linkSupplyAmount,
         },
       };
       const _result = await TokenInfo.updateOne(filter, update);
       console.log(_result);
     } else {
       const info = await TokenInfo.create({
-        asset: asset,
         account: user,
-        depositAmount: result.depositAmount,
-        supplyAmount: result.supplyAmount,
-        lastAccureTime: result.lastAccureTime,
+        wbtcSupplyAmount: result.wbtcSupplyAmount,
+        wethSupplyAmount: result.wethSupplyAmount,
+        linkSupplyAmount: result.linkSupplyAmount,
       });
       console.log(info);
     }
@@ -93,15 +91,28 @@ export const events = async () => {
       txHash: event.transactionHash,
     });
     console.log(details);
-
     const result = await initBorrowInfo(user);
-    const info = await BorrowInfo.create({
-      account: user,
-      borrowAmount: result.borrowAmount,
-      lastAccureTime: result.lastAccureTime,
-      interestAmount: result.interestAmount,
-    });
-    console.log(info);
+    const filter = { account: user };
+    const borrowInfo = await BorowInfo.findOne(filter);
+    if (borrowInfo) {
+      const update = {
+        $set: {
+          wbtcBorrowAmount: result.wbtcBorrowAmount,
+          wethBorrowAmount: result.wethBorrowAmount,
+          linkBorrowAmount: result.linkBorrowAmount,
+        },
+      };
+      const _result = await TokenInfo.updateOne(filter, update);
+      console.log(_result);
+    } else {
+      const info = await BorrowInfo.create({
+        account: user,
+        wbtcBorrowAmount: result.wbtcBorrowAmount,
+        wethBorrowAmount: result.wethBorrowAmount,
+        linkBorrowAmount: result.linkBorrowAmount,
+      });
+      console.log(info);
+    }
   });
 
   contract.on("repayBorrowed", async (user, asset, amount, event) => {
@@ -116,13 +127,27 @@ export const events = async () => {
     console.log(details);
 
     const result = await initBorrowInfo(user);
-    const info = await BorrowInfo.create({
-      account: user,
-      borrowAmount: result.borrowAmount,
-      lastAccureTime: result.lastAccureTime,
-      interestAmount: result.interestAmount,
-    });
-    console.log(info);
+    const filter = { account: user };
+    const borrowInfo = await BorowInfo.findOne(filter);
+    if (borrowInfo) {
+      const update = {
+        $set: {
+          wbtcBorrowAmount: result.wbtcBorrowAmount,
+          wethBorrowAmount: result.wethBorrowAmount,
+          linkBorrowAmount: result.linkBorrowAmount,
+        },
+      };
+      const _result = await TokenInfo.updateOne(filter, update);
+      console.log(_result);
+    } else {
+      const info = await BorrowInfo.create({
+        account: user,
+        wbtcBorrowAmount: result.wbtcBorrowAmount,
+        wethBorrowAmount: result.wethBorrowAmount,
+        linkBorrowAmount: result.linkBorrowAmount,
+      });
+      console.log(info);
+    }
   });
 
   contract.on("depositToken", async (user, asset, amount, event) => {

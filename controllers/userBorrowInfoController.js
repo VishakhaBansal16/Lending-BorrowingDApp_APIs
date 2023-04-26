@@ -13,16 +13,16 @@ export const borrowInfo = async (req, res) => {
 
     if (borrowInfo) {
       const result = {
-        borrowAmount: borrowInfo.borrowAmount,
-        lastAccureTime: borrowInfo.lastAccureTime,
-        interestAmount: borrowInfo.interestAmount,
+        wbtcBorrowAmount: borrowInfo.wbtcBorrowAmount,
+        wethBorrowAmount: borrowInfo.wethBorrowAmount,
+        linkBorrowAmount: borrowInfo.linkBorrowAmount,
       };
       res.json({ result });
     } else {
       const result = {
-        borrowAmount: 0,
-        lastAccureTime: 0,
-        interestAmount: 0,
+        wbtcBorrowAmount: 0,
+        wethBorrowAmount: 0,
+        linkBorrowAmount: 0,
       };
       res.json({ result });
     }
