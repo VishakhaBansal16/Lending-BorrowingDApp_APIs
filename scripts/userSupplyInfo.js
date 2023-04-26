@@ -16,6 +16,12 @@ export const initSupplyInfo = async (account) => {
 
   const resultantArray = [];
   const resultantObject = {};
+
+  const asset0 = "0x07865c6E87B9F70255377e024ace6630C1Eaa37F";
+  const array0 = await implementationContract.userTokenInfo(asset0, account);
+  const supplyAmount0 = parseInt(array0[1], 10);
+  resultantArray.push(supplyAmount0);
+
   const asset1 = "0xAAD4992D949f9214458594dF92B44165Fb84dC19";
   const array1 = await implementationContract.userTokenInfo(asset1, account);
   const supplyAmount1 = parseInt(array1[1], 10);
@@ -31,8 +37,9 @@ export const initSupplyInfo = async (account) => {
   const supplyAmount3 = parseInt(array3[1], 10);
   resultantArray.push(supplyAmount3);
 
-  resultantObject.wbtcSupplyAmount = resultantArray[0];
-  resultantObject.wethSupplyAmount = resultantArray[1];
-  resultantObject.linkSupplyAmount = resultantArray[2];
+  resultantObject.compSupplyAmount = resultantArray[0];
+  resultantObject.wbtcSupplyAmount = resultantArray[1];
+  resultantObject.wethSupplyAmount = resultantArray[2];
+  resultantObject.linkSupplyAmount = resultantArray[3];
   return resultantObject;
 };

@@ -29,6 +29,7 @@ export const events = async () => {
     if (tokenInfo) {
       const update = {
         $set: {
+          compSupplyAmount: result.compSupplyAmount,
           wbtcSupplyAmount: result.wbtcSupplyAmount,
           wethSupplyAmount: result.wethSupplyAmount,
           linkSupplyAmount: result.linkSupplyAmount,
@@ -39,6 +40,7 @@ export const events = async () => {
     } else {
       const info = await TokenInfo.create({
         account: user,
+        compSupplyAmount: result.compSupplyAmount,
         wbtcSupplyAmount: result.wbtcSupplyAmount,
         wethSupplyAmount: result.wethSupplyAmount,
         linkSupplyAmount: result.linkSupplyAmount,
@@ -63,6 +65,7 @@ export const events = async () => {
     if (tokenInfo) {
       const update = {
         $set: {
+          compSupplyAmount: result.compSupplyAmount,
           wbtcSupplyAmount: result.wbtcSupplyAmount,
           wethSupplyAmount: result.wethSupplyAmount,
           linkSupplyAmount: result.linkSupplyAmount,
@@ -73,6 +76,7 @@ export const events = async () => {
     } else {
       const info = await TokenInfo.create({
         account: user,
+        compSupplyAmount: result.compSupplyAmount,
         wbtcSupplyAmount: result.wbtcSupplyAmount,
         wethSupplyAmount: result.wethSupplyAmount,
         linkSupplyAmount: result.linkSupplyAmount,

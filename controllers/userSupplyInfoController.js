@@ -13,6 +13,7 @@ export const supplyInfo = async (req, res) => {
 
     if (tokenInfo) {
       const result = {
+        compSupplyAmount: tokenInfo.compSupplyAmount,
         wbtcSupplyAmount: tokenInfo.wbtcSupplyAmount,
         wethSupplyAmount: tokenInfo.wethSupplyAmount,
         linkSupplyAmount: tokenInfo.linkSupplyAmount,
@@ -20,6 +21,7 @@ export const supplyInfo = async (req, res) => {
       res.json({ result });
     } else {
       const result = {
+        compSupplyAmount: 0,
         wbtcSupplyAmount: 0,
         wethSupplyAmount: 0,
         linkSupplyAmount: 0,

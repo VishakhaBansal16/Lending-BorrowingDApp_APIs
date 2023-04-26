@@ -30,7 +30,7 @@ export const initRepayBorrow = async (baseAsset, amount) => {
     const transactionObject = {
       to: proxyContractAddress,
       data: data,
-      chainId: 80001,
+      chainId: 5,
       gasPrice: 1000000000,
       gasLimit: 200000,
       nonce: 0,

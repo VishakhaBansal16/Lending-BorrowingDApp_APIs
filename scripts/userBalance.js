@@ -1,10 +1,5 @@
 import dotenv from "dotenv/config";
 import { ethers } from "ethers";
-//import { COMP_ABI } from "../ABI/COMP_ABI.js";
-//import { WBTC_ABI } from "../ABI/WBTC_ABI.js";
-//import { WETH_ABI } from "../ABI/WETH_ABI.js";
-//import { LINK_ABI } from "../ABI/LINK_ABI.js";
-//import { usdcImplementationABI } from "../ABI/usdcImplementationABI.js";
 import { assetsABI } from "../ABI/assetsABI.js";
 export const initBalance = async (address) => {
   const alchemyUrl = process.env.ALCHEMY_URL;
