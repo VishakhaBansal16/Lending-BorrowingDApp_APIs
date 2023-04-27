@@ -3,7 +3,7 @@ import { db } from "./db/database.js";
 import mongoose from "mongoose";
 import express from "express";
 import { events } from "./event.js";
-//import { logger } from "./logger.js";
+import { logger } from "./logger.js";
 //import http from "http";
 //import WebSocket from "ws";
 import cors from "cors";
@@ -24,6 +24,7 @@ import { withdrawableAmount_route } from "./routes/withdrawableAmountRoute.js";
 import { borrowableAmount_route } from "./routes/borrowableAmountRoute.js";
 import { repayBorrow_route } from "./routes/repayBorrowRoute.js";
 import { borrowBalance_route } from "./routes/borrowBalanceRoute.js";
+import { decimals_route } from "./routes/decimalsRoute.js";
 //logger.info("This is an info message from index.js");
 //logger.warn("This is a warning message from index.js");
 //logger.error("This is an error message from index.js");
@@ -50,6 +51,7 @@ app.use("/", withdrawableAmount_route);
 app.use("/", borrowableAmount_route);
 app.use("/", repayBorrow_route);
 app.use("/", borrowBalance_route);
+app.use("/", decimals_route);
 // server listening
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
