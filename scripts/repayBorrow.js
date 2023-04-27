@@ -14,14 +14,14 @@ export const initRepayBorrow = async (amount) => {
       LBDappABI,
       provider
     );
-    if (baseAsset == "0x07865c6E87B9F70255377e024ace6630C1Eaa37F") {
-      amount = amount * 10 ** 6;
-    }
-    const _amount = Number(amount).toLocaleString("fullwide", {
-      useGrouping: false,
-    });
+    //if (baseAsset == "0x07865c6E87B9F70255377e024ace6630C1Eaa37F") {
+    // amount = amount * 10 ** 6;
+    // }
+    //const _amount = Number(amount).toLocaleString("fullwide", {
+    //  useGrouping: false,
+    // });
     const methodName = "repayBorrow";
-    const params = [baseAsset, _amount];
+    const params = [baseAsset, amount];
 
     const data = implementationContract.interface.encodeFunctionData(
       methodName,
