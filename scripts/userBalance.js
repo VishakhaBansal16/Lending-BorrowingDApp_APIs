@@ -1,6 +1,8 @@
 import dotenv from "dotenv/config";
 import { ethers } from "ethers";
 import { assetsABI } from "../ABI/assetsABI.js";
+import { logger } from "../logger.js";
+
 export const initBalance = async (address) => {
   const alchemyUrl = process.env.ALCHEMY_URL;
   const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
@@ -58,6 +60,7 @@ export const initBalance = async (address) => {
     }, {});
     return responseArray;
   } catch (err) {
+    logger.error(err);
     return "Transaction not found";
   }
 };

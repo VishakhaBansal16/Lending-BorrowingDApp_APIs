@@ -1,4 +1,5 @@
 import { initBorrow } from "../scripts/borrow.js";
+import { logger } from "../logger.js";
 
 export const borrowAsset = async (req, res) => {
   try {
@@ -16,6 +17,7 @@ export const borrowAsset = async (req, res) => {
 
     res.send(unsignedTransactionObject);
   } catch (err) {
+    logger.error(err);
     res.send("Txn obj not found");
   }
 };

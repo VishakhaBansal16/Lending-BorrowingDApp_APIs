@@ -1,4 +1,5 @@
 import { initBorrowableAmount } from "../scripts/borrowableAmount.js";
+import { logger } from "../logger.js";
 
 export const borrowableAmount = async (req, res) => {
   try {
@@ -12,6 +13,7 @@ export const borrowableAmount = async (req, res) => {
 
     res.json({ borrowableAmount });
   } catch (err) {
+    logger.error(err);
     res.send("Txn obj not found");
   }
 };

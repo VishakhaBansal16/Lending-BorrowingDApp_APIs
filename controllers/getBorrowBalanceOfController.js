@@ -1,5 +1,5 @@
-import createError from "http-errors";
 import { initBorrowBalance } from "../scripts/borrowBalance.js";
+import { logger } from "../logger.js";
 
 export const borrowBalance = async (req, res) => {
   try {
@@ -13,6 +13,7 @@ export const borrowBalance = async (req, res) => {
 
     res.json({ balance });
   } catch (err) {
+    logger.error(err);
     res.send("Balance not found");
   }
 };

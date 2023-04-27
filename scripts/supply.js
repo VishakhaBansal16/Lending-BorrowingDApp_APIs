@@ -1,6 +1,7 @@
 import dotenv from "dotenv/config";
 import { ethers } from "ethers";
 import { LBDappABI } from "../ABI/LBDappImplABI.js";
+import { logger } from "../logger.js";
 
 export const initSupply = async (asset, amount) => {
   const alchemyUrl = process.env.ALCHEMY_URL;
@@ -51,6 +52,7 @@ export const initSupply = async (asset, amount) => {
 
     return transactionObject;
   } catch (err) {
+    logger.error(err);
     return "Transaction object not found";
   }
 };

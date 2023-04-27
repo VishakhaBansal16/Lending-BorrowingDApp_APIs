@@ -1,5 +1,5 @@
-import createError from "http-errors";
 import { initAllowance } from "../scripts/allowance.js";
+import { logger } from "../logger.js";
 
 export const allowance = async (req, res) => {
   try {
@@ -13,6 +13,7 @@ export const allowance = async (req, res) => {
 
     res.json({ allowance });
   } catch (err) {
+    logger.error(err);
     res.send("Allowance not found");
   }
 };

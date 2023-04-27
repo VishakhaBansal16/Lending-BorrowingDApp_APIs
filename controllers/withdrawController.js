@@ -1,4 +1,5 @@
 import { initWithdraw } from "../scripts/withdraw.js";
+import { logger } from "../logger.js";
 
 export const withdrawAsset = async (req, res) => {
   try {
@@ -16,6 +17,7 @@ export const withdrawAsset = async (req, res) => {
 
     res.send(unsignedTransactionObject);
   } catch (err) {
+    logger.error(err);
     res.send("Txn obj not found");
   }
 };

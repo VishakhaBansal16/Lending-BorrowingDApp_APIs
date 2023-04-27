@@ -1,15 +1,15 @@
-import createError from "http-errors";
 import { initRepayBorrow } from "../scripts/repayBorrow.js";
+import { logger } from "../logger.js";
 
 export const repayBorrow = async (req, res) => {
   try {
     //Get user input
-    const { baseAsset, amount } = req.body;
-    if (!(baseAsset, amount)) {
-      res.send("All inputs required");
+    const { amount } = req.body;
+    if (!amount) {
+      res.send("An input required");
     }
 
-    const unsignedTransactionObject = await initRepayBorrow(baseAsset, amount);
+    const unsignedTransactionObject = await initRepayBorrow(amount);
 
     if (!unsignedTransactionObject) {
       res.send("Page not found");
@@ -17,6 +17,7 @@ export const repayBorrow = async (req, res) => {
 
     res.send(unsignedTransactionObject);
   } catch (err) {
+    logger.error(err);
     res.send("Txn obj not found");
   }
 };

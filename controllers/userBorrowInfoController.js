@@ -1,4 +1,5 @@
 import { BorrowInfo } from "../models/userBorrowInfoModel.js";
+import { logger } from "../logger.js";
 
 export const borrowInfo = async (req, res) => {
   try {
@@ -27,6 +28,7 @@ export const borrowInfo = async (req, res) => {
       res.json({ result });
     }
   } catch (err) {
+    logger.error(err);
     res.send("Txn obj not found");
   }
 };

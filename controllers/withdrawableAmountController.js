@@ -1,4 +1,5 @@
 import { initWithdrawableAmount } from "../scripts/withdrawableAmount.js";
+import { logger } from "../logger.js";
 
 export const withdrawableAmount = async (req, res) => {
   try {
@@ -12,6 +13,7 @@ export const withdrawableAmount = async (req, res) => {
 
     res.send(withdrawAccess);
   } catch (err) {
+    logger.error(err);
     res.send("Txn obj not found");
   }
 };

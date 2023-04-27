@@ -1,5 +1,5 @@
-import createError from "http-errors";
 import { initApprove } from "../scripts/approve.js";
+import { logger } from "../logger.js";
 
 export const approve = async (req, res) => {
   try {
@@ -17,6 +17,7 @@ export const approve = async (req, res) => {
     }
     res.send(unsignedTransactionObject);
   } catch (err) {
+    logger.error(err);
     res.send("Txn obj not found");
   }
 };

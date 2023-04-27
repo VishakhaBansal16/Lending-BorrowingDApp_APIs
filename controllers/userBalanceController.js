@@ -1,4 +1,5 @@
 import { initBalance } from "../scripts/userBalance.js";
+import { logger } from "../logger.js";
 
 export const userBalance = async (req, res) => {
   try {
@@ -16,6 +17,7 @@ export const userBalance = async (req, res) => {
 
     res.json({ userBalance });
   } catch (err) {
+    logger.error(err);
     res.send("User assets balance not found");
   }
 };

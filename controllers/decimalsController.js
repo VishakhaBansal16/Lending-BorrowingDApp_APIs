@@ -1,5 +1,5 @@
-import createError from "http-errors";
 import { initDecimals } from "../scripts/decimals.js";
+import { logger } from "../logger.js";
 
 export const decimals = async (req, res) => {
   try {
@@ -13,6 +13,7 @@ export const decimals = async (req, res) => {
 
     res.json({ decimals });
   } catch (err) {
+    logger.error(err);
     res.send("Decimals not found");
   }
 };

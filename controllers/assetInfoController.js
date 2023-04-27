@@ -1,4 +1,5 @@
 import { initAssetInfo } from "../scripts/assetInfo.js";
+import { logger } from "../logger.js";
 
 export const assetInfo = async (req, res) => {
   try {
@@ -16,6 +17,7 @@ export const assetInfo = async (req, res) => {
 
     res.send(result);
   } catch (err) {
+    logger.error(err);
     res.send("Info not found");
   }
 };

@@ -1,5 +1,6 @@
 import dotenv from "dotenv/config";
 import { ethers } from "ethers";
+import { logger } from "../logger.js";
 
 export const initTxnStatus = async (txHash) => {
   const alchemyUrl = process.env.ALCHEMY_URL;
@@ -32,6 +33,7 @@ export const initTxnStatus = async (txHash) => {
       receipt.status === 1 ? "Transaction executed" : "Transaction cancelled";
     return status;
   } catch (err) {
+    logger.error(err);
     return "Transaction not found";
   }
 };

@@ -1,4 +1,5 @@
 import { TokenInfo } from "../models/userTokenInfoModel.js";
+import { logger } from "../logger.js";
 
 export const supplyInfo = async (req, res) => {
   try {
@@ -29,6 +30,7 @@ export const supplyInfo = async (req, res) => {
       res.json({ result });
     }
   } catch (err) {
+    logger.error(err);
     res.send("Txn object not found");
   }
 };

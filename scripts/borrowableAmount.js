@@ -1,7 +1,7 @@
 import dotenv from "dotenv/config";
 import { ethers } from "ethers";
 import { LBDappABI } from "../ABI/LBDappImplABI.js";
-
+import { logger } from "../logger.js";
 export const initBorrowableAmount = async (account) => {
   const alchemyUrl = process.env.ALCHEMY_URL;
   const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
@@ -18,6 +18,7 @@ export const initBorrowableAmount = async (account) => {
 
     return borrowableAmount;
   } catch (err) {
+    logger.error(err);
     return "Transaction object not found";
   }
 };

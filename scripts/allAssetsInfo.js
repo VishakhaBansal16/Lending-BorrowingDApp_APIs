@@ -40,9 +40,6 @@ export const initAllAssetsInfo = async () => {
       }, {});
       result.push(responseObject);
     }
-    logger.info("This is an info message from allAssetsInfo.js");
-    logger.warn("This is a warning message from allAssetsInfo.js");
-    logger.error("This is a warning message from allAssetsInfo.js");
     return result;
   } catch (err) {
     logger.error(err);

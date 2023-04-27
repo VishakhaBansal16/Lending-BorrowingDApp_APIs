@@ -1,5 +1,4 @@
-import dotenv from "dotenv/config";
-import { ethers } from "ethers";
+import { logger } from "../logger.js";
 export const initDecimals = async (asset) => {
   const compAddress = "0x3587b2F7E0E2D6166d6C14230e7Fe160252B0ba4";
   const wbtcAddress = "0xAAD4992D949f9214458594dF92B44165Fb84dC19";
@@ -23,6 +22,7 @@ export const initDecimals = async (asset) => {
       return 6;
     }
   } catch (err) {
+    logger.error(err);
     return "Asset aaddress is invalid";
   }
 };
