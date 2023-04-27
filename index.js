@@ -1,9 +1,8 @@
 import dotenv from "dotenv/config";
 import { db } from "./db/database.js";
-import mongoose from "mongoose";
 import express from "express";
 import { events } from "./event.js";
-import { logger } from "./logger.js";
+//import { logger } from "./logger.js";
 //import http from "http";
 //import WebSocket from "ws";
 import cors from "cors";

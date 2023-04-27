@@ -14,18 +14,22 @@ export const supplyInfo = async (req, res) => {
 
     if (tokenInfo) {
       const result = {
-        compSupplyAmount: tokenInfo.compSupplyAmount,
-        wbtcSupplyAmount: tokenInfo.wbtcSupplyAmount,
-        wethSupplyAmount: tokenInfo.wethSupplyAmount,
-        linkSupplyAmount: tokenInfo.linkSupplyAmount,
+        "0x3587b2f7e0e2d6166d6c14230e7fe160252b0ba4":
+          tokenInfo.compSupplyAmount,
+        "0xaad4992d949f9214458594df92b44165fb84dc19":
+          tokenInfo.wbtcSupplyAmount,
+        "0x42a71137c09ae83d8d05974960fd607d40033499":
+          tokenInfo.wethSupplyAmount,
+        "0xaf95ff5fb592646d86bf240b3cae0903b6e4dd38":
+          tokenInfo.linkSupplyAmount,
       };
       res.json({ result });
     } else {
       const result = {
-        compSupplyAmount: 0,
-        wbtcSupplyAmount: 0,
-        wethSupplyAmount: 0,
-        linkSupplyAmount: 0,
+        "0x3587b2f7e0e2d6166d6c14230e7fe160252b0ba4": 0,
+        "0xaad4992d949f9214458594df92b44165fb84dc19": 0,
+        "0x42a71137c09ae83d8d05974960fd607d40033499": 0,
+        "0xaf95ff5fb592646d86bf240b3cae0903b6e4dd38": 0,
       };
       res.json({ result });
     }

@@ -14,16 +14,19 @@ export const borrowInfo = async (req, res) => {
 
     if (borrowInfo) {
       const result = {
-        wbtcBorrowAmount: borrowInfo.wbtcBorrowAmount,
-        wethBorrowAmount: borrowInfo.wethBorrowAmount,
-        linkBorrowAmount: borrowInfo.linkBorrowAmount,
+        "0xaad4992d949f9214458594df92b44165fb84dc19":
+          borrowInfo.wbtcBorrowAmount,
+        "0x42a71137c09ae83d8d05974960fd607d40033499":
+          borrowInfo.wethBorrowAmount,
+        "0xaf95ff5fb592646d86bf240b3cae0903b6e4dd38":
+          borrowInfo.linkBorrowAmount,
       };
       res.json({ result });
     } else {
       const result = {
-        wbtcBorrowAmount: 0,
-        wethBorrowAmount: 0,
-        linkBorrowAmount: 0,
+        "0xaad4992d949f9214458594df92b44165fb84dc19": 0,
+        "0x42a71137c09ae83d8d05974960fd607d40033499": 0,
+        "0xaf95ff5fb592646d86bf240b3cae0903b6e4dd38": 0,
       };
       res.json({ result });
     }
