@@ -68,6 +68,40 @@ export const LBDappABI = [
   {
     anonymous: false,
     inputs: [
+      { indexed: true, internalType: "address", name: "user", type: "address" },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "SupplyBase",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: "address", name: "user", type: "address" },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "SupplyCollateral",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
       {
         indexed: true,
         internalType: "address",
@@ -83,19 +117,13 @@ export const LBDappABI = [
     inputs: [
       { indexed: true, internalType: "address", name: "user", type: "address" },
       {
-        indexed: true,
-        internalType: "address",
-        name: "asset",
-        type: "address",
-      },
-      {
         indexed: false,
         internalType: "uint256",
         name: "amount",
         type: "uint256",
       },
     ],
-    name: "borrowToken",
+    name: "WithdrawBase",
     type: "event",
   },
   {
@@ -115,124 +143,45 @@ export const LBDappABI = [
         type: "uint256",
       },
     ],
-    name: "depositToken",
+    name: "WithdrawCollateral",
     type: "event",
   },
   {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: "address", name: "user", type: "address" },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "asset",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "repayBorrowed",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: "address", name: "user", type: "address" },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "asset",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "supplyToken",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: "address", name: "user", type: "address" },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "asset",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "supplyWithdraw",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: "address", name: "user", type: "address" },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "asset",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "withdrawToken",
-    type: "event",
-  },
-  {
-    inputs: [],
-    name: "baseBorrowIndex",
-    outputs: [{ internalType: "uint64", name: "", type: "uint64" }],
+    inputs: [{ internalType: "address", name: "account", type: "address" }],
+    name: "balanceOf",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
-    name: "baseSupplyIndex",
-    outputs: [{ internalType: "uint64", name: "", type: "uint64" }],
+    name: "baseBorrowMin",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      { internalType: "address", name: "asset", type: "address" },
-      { internalType: "uint256", name: "amount", type: "uint256" },
-    ],
-    name: "borrow",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [],
-    name: "cometAddress",
+    name: "baseToken",
     outputs: [{ internalType: "address", name: "", type: "address" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [],
-    name: "currentTimestamp",
+    inputs: [{ internalType: "address", name: "account", type: "address" }],
+    name: "borrowBalanceOf",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "account", type: "address" },
+      { internalType: "address", name: "asset", type: "address" },
+      { internalType: "uint256", name: "amount", type: "uint256" },
+    ],
+    name: "canWithdrawExtraCollateral",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
     stateMutability: "view",
     type: "function",
   },
@@ -307,13 +256,6 @@ export const LBDappABI = [
   },
   {
     inputs: [{ internalType: "address", name: "account", type: "address" }],
-    name: "getBorrowBalanceOf",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "address", name: "account", type: "address" }],
     name: "getBorrowableAmount",
     outputs: [{ internalType: "int256", name: "", type: "int256" }],
     stateMutability: "view",
@@ -333,46 +275,9 @@ export const LBDappABI = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "rewardTokenPriceFeed",
-        type: "address",
-      },
-    ],
-    name: "getRewardAprForBorrowBase",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "rewardTokenPriceFeed",
-        type: "address",
-      },
-    ],
-    name: "getRewardAprForSupplyBase",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "getSupplyApr",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      { internalType: "address", name: "account", type: "address" },
-      { internalType: "address", name: "asset", type: "address" },
-      { internalType: "uint256", name: "amount", type: "uint256" },
-    ],
-    name: "getWithdrawableExtraAmount",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
     stateMutability: "view",
     type: "function",
   },
@@ -383,6 +288,13 @@ export const LBDappABI = [
     name: "initialize",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "account", type: "address" }],
+    name: "isBorrowCollateralized",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -408,21 +320,11 @@ export const LBDappABI = [
   },
   {
     inputs: [
-      { internalType: "address", name: "baseAsset", type: "address" },
-      { internalType: "uint256", name: "amount", type: "uint256" },
-    ],
-    name: "repayBorrow",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
       { internalType: "address", name: "asset", type: "address" },
       { internalType: "uint256", name: "amount", type: "uint256" },
     ],
     name: "supply",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
@@ -454,12 +356,8 @@ export const LBDappABI = [
   },
   {
     inputs: [{ internalType: "address", name: "", type: "address" }],
-    name: "userBorrowInfo",
-    outputs: [
-      { internalType: "uint256", name: "borrowAmount", type: "uint256" },
-      { internalType: "uint256", name: "lastAccureTime", type: "uint256" },
-      { internalType: "uint256", name: "interestAmount", type: "uint256" },
-    ],
+    name: "userBasic",
+    outputs: [{ internalType: "int104", name: "", type: "int104" }],
     stateMutability: "view",
     type: "function",
   },
@@ -468,12 +366,8 @@ export const LBDappABI = [
       { internalType: "address", name: "", type: "address" },
       { internalType: "address", name: "", type: "address" },
     ],
-    name: "userTokenInfo",
-    outputs: [
-      { internalType: "uint256", name: "depositAmount", type: "uint256" },
-      { internalType: "uint256", name: "supplyAmount", type: "uint256" },
-      { internalType: "uint256", name: "lastAccureTime", type: "uint256" },
-    ],
+    name: "userCollateral",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
@@ -490,7 +384,7 @@ export const LBDappABI = [
       { internalType: "uint256", name: "amount", type: "uint256" },
     ],
     name: "withdraw",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },

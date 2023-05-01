@@ -1,4 +1,4 @@
-import { TokenInfo } from "../models/userTokenInfoModel.js";
+import { TokenInfo } from "../models/userSupplyInfoModel.js";
 import { logger } from "../logger.js";
 
 export const supplyInfo = async (req, res) => {

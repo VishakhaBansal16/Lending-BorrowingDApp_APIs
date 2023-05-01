@@ -6,6 +6,7 @@ const tokenInfoSchema = new mongoose.Schema({
   wbtcSupplyAmount: { type: Number },
   wethSupplyAmount: { type: Number },
   linkSupplyAmount: { type: Number },
+  usdcSupplyAmount: { type: Number },
 });
 
 export const TokenInfo = mongoose.model("TokenInfo", tokenInfoSchema);

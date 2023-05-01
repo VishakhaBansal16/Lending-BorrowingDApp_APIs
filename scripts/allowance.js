@@ -8,10 +8,12 @@ export const initAllowance = async (owner, asset) => {
 
   try {
     const contract = new ethers.Contract(asset, assetsABI, provider);
-    const spender = "0x39872F03eCCF551eCe1E7049bAB7003E6cc22BcC"; //proxy contract address
+    const spender = "0x2f5B9748001556E69C9248f1649FA71332d7FF31"; //proxy contract address
     const allowance = await contract.allowance(owner, spender);
-    const allowanceInDecimal = parseInt(allowance, 10);
-    return allowanceInDecimal;
+    const allowanceInInteger = parseInt(allowance, 10);
+    const decimals = await contract.decimals();
+    const _allowance = allowanceInInteger / 10 ** decimals;
+    return _allowance;
   } catch (err) {
     logger.error(err);
     return "Allowance not found";

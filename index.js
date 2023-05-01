@@ -2,12 +2,8 @@ import dotenv from "dotenv/config";
 import { db } from "./db/database.js";
 import express from "express";
 import { events } from "./event.js";
-//import { logger } from "./logger.js";
-//import http from "http";
-//import WebSocket from "ws";
 import cors from "cors";
 import { supply_route } from "./routes/supplyRoute.js";
-import { borrow_route } from "./routes/borrowRoute.js";
 import { withdraw_route } from "./routes/withdrawRoute.js";
 import { txStatus_route } from "./routes/transactionStatusRoute.js";
 import { assetInfo_route } from "./routes/assetInfoRoute.js";
@@ -18,15 +14,11 @@ import { allowance_route } from "./routes/allowanceRoute.js";
 import { APR_route } from "./routes/supply&BorrowAPRroute.js";
 import { price_route } from "./routes/priceFeedRoute.js";
 import { supplyInfo_route } from "./routes/userSupplyInfoRoute.js";
-import { borrowInfo_route } from "./routes/userBorrowInfoRoute.js";
 import { withdrawableAmount_route } from "./routes/withdrawableAmountRoute.js";
 import { borrowableAmount_route } from "./routes/borrowableAmountRoute.js";
-import { repayBorrow_route } from "./routes/repayBorrowRoute.js";
 import { borrowBalance_route } from "./routes/borrowBalanceRoute.js";
 import { decimals_route } from "./routes/decimalsRoute.js";
-//logger.info("This is an info message from index.js");
-//logger.warn("This is a warning message from index.js");
-//logger.error("This is an error message from index.js");
+
 const app = express();
 const port = process.env.API_PORT || 3000;
 app.use(express.json());
@@ -34,7 +26,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.options("*", cors());
 app.use("/", supply_route);
-app.use("/", borrow_route);
 app.use("/", withdraw_route);
 app.use("/", txStatus_route);
 app.use("/", assetInfo_route);
@@ -45,14 +36,14 @@ app.use("/", allowance_route);
 app.use("/", APR_route);
 app.use("/", price_route);
 app.use("/", supplyInfo_route);
-app.use("/", borrowInfo_route);
 app.use("/", withdrawableAmount_route);
 app.use("/", borrowableAmount_route);
-app.use("/", repayBorrow_route);
 app.use("/", borrowBalance_route);
 app.use("/", decimals_route);
+
 // server listening
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
 events();
