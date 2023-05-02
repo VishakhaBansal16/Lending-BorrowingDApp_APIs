@@ -17,11 +17,12 @@ export const initSupplyBorrowAPR = async () => {
     );
 
     const responseObject = {};
+    const SECONDS_PER_YEAR = 60 * 60 * 24 * 365;
     const supplyAPR = await implementationContract.getSupplyApr();
-    const supplyApr = parseInt(supplyAPR, 10);
+    const supplyApr = supplyAPR * SECONDS_PER_YEAR * 100;
     responseObject.SupplyAPR = supplyApr;
     const borrowAPR = await implementationContract.getBorrowApr();
-    const borrowApr = parseInt(borrowAPR, 10);
+    const borrowApr = borrowAPR * SECONDS_PER_YEAR * 100;
     responseObject.BorrowAPR = borrowApr;
     return responseObject;
   } catch (err) {

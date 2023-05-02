@@ -1,3 +1,5 @@
+import dotenv from "dotenv/config";
+import { ethers } from "ethers";
 import { logger } from "../logger.js";
 import { assetsABI } from "../ABI/assetsABI.js";
 export const initDecimals = async (asset) => {

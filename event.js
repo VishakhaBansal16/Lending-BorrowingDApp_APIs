@@ -43,6 +43,7 @@ export const events = async () => {
         wbtcSupplyAmount: result.wbtcSupplyAmount,
         wethSupplyAmount: result.wethSupplyAmount,
         linkSupplyAmount: result.linkSupplyAmount,
+        usdcSupplyAmount: result.usdcSupplyAmount,
       });
       console.log(info);
     }

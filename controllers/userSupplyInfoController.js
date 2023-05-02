@@ -22,6 +22,8 @@ export const supplyInfo = async (req, res) => {
           tokenInfo.wethSupplyAmount,
         "0xaf95ff5fb592646d86bf240b3cae0903b6e4dd38":
           tokenInfo.linkSupplyAmount,
+        "0x07865c6E87B9F70255377e024ace6630C1Eaa37F":
+          tokenInfo.usdcSupplyAmount,
       };
       res.json({ result });
     } else {
@@ -30,6 +32,7 @@ export const supplyInfo = async (req, res) => {
         "0xaad4992d949f9214458594df92b44165fb84dc19": 0,
         "0x42a71137c09ae83d8d05974960fd607d40033499": 0,
         "0xaf95ff5fb592646d86bf240b3cae0903b6e4dd38": 0,
+        "0x07865c6E87B9F70255377e024ace6630C1Eaa37F": 0,
       };
       res.json({ result });
     }
