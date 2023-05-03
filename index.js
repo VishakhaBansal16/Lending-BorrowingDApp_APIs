@@ -18,6 +18,7 @@ import { withdrawableAmount_route } from "./routes/withdrawableAmountRoute.js";
 import { borrowableAmount_route } from "./routes/borrowableAmountRoute.js";
 import { borrowBalance_route } from "./routes/borrowBalanceRoute.js";
 import { decimals_route } from "./routes/decimalsRoute.js";
+import { balanceOf_route } from "./routes/balanceOfRoute.js";
 
 const app = express();
 const port = process.env.API_PORT || 3000;
@@ -40,6 +41,7 @@ app.use("/", withdrawableAmount_route);
 app.use("/", borrowableAmount_route);
 app.use("/", borrowBalance_route);
 app.use("/", decimals_route);
+app.use("/", balanceOf_route);
 
 // server listening
 app.listen(port, () => {

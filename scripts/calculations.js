@@ -1,4 +1,4 @@
-const borrowedUsdc = await contract.borrowBalanceOf(account);//borrowed amount + 
+const borrowedUsdc = await contract.borrowBalanceOf(account);//borrowed amount + interest amount
 const leftUsdcToBorrow = await contract.getBorrowableAmount(
   account
 );
