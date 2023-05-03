@@ -50,11 +50,7 @@ export const initSupplyInfo = async (account) => {
     const supplyAmount3 = parseInt(amount3, 10);
     resultantArray.push(supplyAmount3);
 
-    const asset4 = "0x07865c6E87B9F70255377e024ace6630C1Eaa37F";
-    const amount4 = await implementationContract.userCollateral(
-      account,
-      asset4
-    );
+    const amount4 = await implementationContract.balanceOf(account);
     const supplyAmount4 = parseInt(amount4, 10);
     resultantArray.push(supplyAmount4);
 
