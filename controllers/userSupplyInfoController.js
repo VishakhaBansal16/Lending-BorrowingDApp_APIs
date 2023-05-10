@@ -22,7 +22,7 @@ export const supplyInfo = async (req, res) => {
           tokenInfo.wethSupplyAmount,
         "0xaf95ff5fb592646d86bf240b3cae0903b6e4dd38":
           tokenInfo.linkSupplyAmount,
-        "0x07865c6E87B9F70255377e024ace6630C1Eaa37F":
+        "0x07865c6e87b9f70255377e024ace6630c1eaa37f":
           tokenInfo.usdcSupplyAmount,
       };
       res.json({ result });
