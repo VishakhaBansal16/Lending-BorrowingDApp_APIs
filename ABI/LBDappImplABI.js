@@ -10,6 +10,74 @@ export const LBDappABI = [
     anonymous: false,
     inputs: [
       {
+        indexed: true,
+        internalType: "address",
+        name: "absorber",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "borrower",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "collateralAbsorbed",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdValue",
+        type: "uint256",
+      },
+    ],
+    name: "AbsorbCollateral",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "absorber",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "borrower",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "basePaidOut",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdValue",
+        type: "uint256",
+      },
+    ],
+    name: "AbsorbDebt",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: false,
         internalType: "address",
         name: "previousAdmin",
@@ -36,6 +104,37 @@ export const LBDappABI = [
       },
     ],
     name: "BeaconUpgraded",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "buyer",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "baseAmount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "collateralAmount",
+        type: "uint256",
+      },
+    ],
+    name: "BuyCollateral",
     type: "event",
   },
   {
@@ -102,6 +201,21 @@ export const LBDappABI = [
   {
     anonymous: false,
     inputs: [
+      { indexed: true, internalType: "address", name: "from", type: "address" },
+      { indexed: true, internalType: "address", name: "to", type: "address" },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "Transfer",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
       {
         indexed: true,
         internalType: "address",
@@ -147,6 +261,16 @@ export const LBDappABI = [
     type: "event",
   },
   {
+    inputs: [
+      { internalType: "address", name: "absorber", type: "address" },
+      { internalType: "address[]", name: "accounts", type: "address[]" },
+    ],
+    name: "absorb",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [{ internalType: "address", name: "account", type: "address" }],
     name: "balanceOf",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
@@ -172,6 +296,18 @@ export const LBDappABI = [
     name: "borrowBalanceOf",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "asset", type: "address" },
+      { internalType: "uint256", name: "minAmount", type: "uint256" },
+      { internalType: "uint256", name: "baseAmount", type: "uint256" },
+      { internalType: "address", name: "recipient", type: "address" },
+    ],
+    name: "buyCollateral",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -262,6 +398,13 @@ export const LBDappABI = [
     type: "function",
   },
   {
+    inputs: [{ internalType: "address", name: "", type: "address" }],
+    name: "getCollateralReserves",
+    outputs: [{ internalType: "uint128", name: "", type: "uint128" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -275,6 +418,13 @@ export const LBDappABI = [
     type: "function",
   },
   {
+    inputs: [{ internalType: "address", name: "account", type: "address" }],
+    name: "getLiquidatedAccountLeftAmount",
+    outputs: [{ internalType: "int256", name: "", type: "int256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "getSupplyApr",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
@@ -284,6 +434,12 @@ export const LBDappABI = [
   {
     inputs: [
       { internalType: "address", name: "_cometAddress", type: "address" },
+      { internalType: "uint16", name: "_targetBaseReserve", type: "uint16" },
+      {
+        internalType: "uint16",
+        name: "_targetCollateralReserve",
+        type: "uint16",
+      },
     ],
     name: "initialize",
     outputs: [],
@@ -294,6 +450,43 @@ export const LBDappABI = [
     inputs: [{ internalType: "address", name: "account", type: "address" }],
     name: "isBorrowCollateralized",
     outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "account", type: "address" }],
+    name: "isLiquidatable",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "recipient", type: "address" },
+      { internalType: "uint256", name: "amount", type: "uint256" },
+      { internalType: "bool", name: "withdrawLeftOver", type: "bool" },
+    ],
+    name: "liquidatedSupplyOrWithdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "", type: "address" }],
+    name: "liquidatorPoints",
+    outputs: [
+      { internalType: "uint32", name: "numAbsorbs", type: "uint32" },
+      { internalType: "uint64", name: "numAbsorbed", type: "uint64" },
+      { internalType: "uint128", name: "approxSpend", type: "uint128" },
+      { internalType: "uint32", name: "_reserved", type: "uint32" },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "numAssets",
+    outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
     stateMutability: "view",
     type: "function",
   },
@@ -312,6 +505,16 @@ export const LBDappABI = [
     type: "function",
   },
   {
+    inputs: [
+      { internalType: "address", name: "asset", type: "address" },
+      { internalType: "uint256", name: "baseAmount", type: "uint256" },
+    ],
+    name: "quoteCollateral",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "renounceOwnership",
     outputs: [],
@@ -326,6 +529,20 @@ export const LBDappABI = [
     name: "supply",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "targetBaseReserve",
+    outputs: [{ internalType: "uint16", name: "", type: "uint16" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "targetCollateralReserve",
+    outputs: [{ internalType: "uint16", name: "", type: "uint16" }],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -357,7 +574,10 @@ export const LBDappABI = [
   {
     inputs: [{ internalType: "address", name: "", type: "address" }],
     name: "userBasic",
-    outputs: [{ internalType: "int104", name: "", type: "int104" }],
+    outputs: [
+      { internalType: "int104", name: "principal", type: "int104" },
+      { internalType: "int104", name: "liquidatedLeftOver", type: "int104" },
+    ],
     stateMutability: "view",
     type: "function",
   },
@@ -367,14 +587,14 @@ export const LBDappABI = [
       { internalType: "address", name: "", type: "address" },
     ],
     name: "userCollateral",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    outputs: [{ internalType: "uint128", name: "", type: "uint128" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "version",
-    outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
+    outputs: [{ internalType: "string", name: "", type: "string" }],
     stateMutability: "view",
     type: "function",
   },

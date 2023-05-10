@@ -7,7 +7,7 @@ import { logger } from "../logger.js";
 export const initWithdrawableAmount = async (account, asset, amount) => {
   const alchemyUrl = process.env.ALCHEMY_URL;
   const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
-  const proxyContractAddress = "0x2f5B9748001556E69C9248f1649FA71332d7FF31";
+  const proxyContractAddress = "0xCf8c523eED3a1c1ebDA2415B460e3B52D85e6b44";
 
   try {
     const contract = new ethers.Contract(asset, assetsABI, provider);

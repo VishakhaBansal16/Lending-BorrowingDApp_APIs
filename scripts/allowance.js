@@ -8,7 +8,7 @@ export const initAllowance = async (owner, asset) => {
 
   try {
     const contract = new ethers.Contract(asset, assetsABI, provider);
-    const spender = "0x2f5B9748001556E69C9248f1649FA71332d7FF31"; //proxy contract address
+    const spender = "0xCf8c523eED3a1c1ebDA2415B460e3B52D85e6b44"; //proxy contract address
     const allowance = await contract.allowance(owner, spender);
     const allowanceInInteger = parseInt(allowance, 10);
     const decimals = await contract.decimals();

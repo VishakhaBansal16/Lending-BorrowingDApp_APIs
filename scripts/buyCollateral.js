@@ -4,7 +4,12 @@ import { LBDappABI } from "../ABI/LBDappImplABI.js";
 import { assetsABI } from "../ABI/assetsABI.js";
 import { logger } from "../logger.js";
 
-export const initSupply = async (asset, amount) => {
+export const initBuyCollateral = async (
+  asset,
+  minAmount,
+  baseAmount,
+  recipient
+) => {
   const alchemyUrl = process.env.ALCHEMY_URL;
   const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
   const proxyContract = "0xCf8c523eED3a1c1ebDA2415B460e3B52D85e6b44";
@@ -13,12 +18,16 @@ export const initSupply = async (asset, amount) => {
     const contract = new ethers.Contract(asset, assetsABI, provider);
     const Contract = new ethers.Contract(proxyContract, LBDappABI, provider);
     const decimals = await contract.decimals();
-    amount = amount * 10 ** decimals;
-    const _amount = Number(amount).toLocaleString("fullwide", {
+    minAmount = minAmount * 10 ** decimals;
+    const _minAmount = Number(minAmount).toLocaleString("fullwide", {
       useGrouping: false,
     });
-    const methodName = "supply";
-    const params = [asset, _amount];
+    baseAmount = baseAmount * 10 ** 6;
+    const _baseAmount = Number(baseAmount).toLocaleString("fullwide", {
+      useGrouping: false,
+    });
+    const methodName = "buyCollateral";
+    const params = [asset, _minAmount, _baseAmount, recipient];
 
     const data = Contract.interface.encodeFunctionData(methodName, params);
 

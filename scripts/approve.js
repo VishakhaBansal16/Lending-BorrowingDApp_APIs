@@ -7,7 +7,7 @@ export const initApprove = async (asset, value) => {
   const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
   try {
     const contract = new ethers.Contract(asset, assetsABI, provider);
-    const spender = "0x2f5B9748001556E69C9248f1649FA71332d7FF31"; //proxy contract address
+    const spender = "0xCf8c523eED3a1c1ebDA2415B460e3B52D85e6b44"; //proxy contract address
     const decimals = await contract.decimals();
     value = value * 10 ** decimals;
     const _value = Number(value).toLocaleString("fullwide", {

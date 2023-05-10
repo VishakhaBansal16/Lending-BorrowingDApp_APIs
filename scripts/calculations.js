@@ -8,7 +8,7 @@ import { TokenInfo } from "../models/userSupplyInfoModel.js";
 const alchemyUrl = process.env.ALCHEMY_URL;
 const provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
 
-const proxyAddress = "0x2f5B9748001556E69C9248f1649FA71332d7FF31";
+const proxyAddress = "0xCf8c523eED3a1c1ebDA2415B460e3B52D85e6b44";
 const contract = new ethers.Contract(proxyAddress, LBDappABI, provider);
 const oraclePrices = [];
 //getting oracle price of all 4 listed assets
