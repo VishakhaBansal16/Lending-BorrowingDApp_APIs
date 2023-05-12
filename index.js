@@ -21,10 +21,12 @@ import { decimals_route } from "./routes/decimalsRoute.js";
 import { balanceOf_route } from "./routes/balanceOfRoute.js";
 import { leftAmount_route } from "./routes/leftAmountRoute.js";
 import { isLiquidatable_route } from "./routes/isLiquidatableRoute.js";
-import { collateralReserves_route } from "./routes/collateralReservesRoute.js";
+import { allCollateralReserves_route } from "./routes/allCollateralReservesRoute.js";
 import { quoteCollateral_route } from "./routes/quoteCollateralRoute.js";
 import { buyCollateral_route } from "./routes/buyCollateralRoute.js";
 import { liquidatedSupplyOrWithdraw_route } from "./routes/liquidatedSupplyOrWithdrawRoute.js";
+import { absorb_route } from "./routes/absorbRoute.js";
+import { liquidatorPoints_route } from "./routes/liquidatorPointsRoute.js";
 
 const app = express();
 const port = process.env.API_PORT || 3000;
@@ -50,10 +52,12 @@ app.use("/", decimals_route);
 app.use("/", balanceOf_route);
 app.use("/", leftAmount_route);
 app.use("/", isLiquidatable_route);
-app.use("/", collateralReserves_route);
+app.use("/", allCollateralReserves_route);
 app.use("/", quoteCollateral_route);
 app.use("/", buyCollateral_route);
 app.use("/", liquidatedSupplyOrWithdraw_route);
+app.use("/", absorb_route);
+app.use("/", liquidatorPoints_route);
 
 // server listening
 app.listen(port, () => {
