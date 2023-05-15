@@ -12,6 +12,6 @@ export const collateral = async (req, res) => {
     res.json({ amount });
   } catch (err) {
     logger.error(err);
-    res.send("Amount not found");
+    res.send(err);
   }
 };

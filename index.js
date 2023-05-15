@@ -27,6 +27,7 @@ import { buyCollateral_route } from "./routes/buyCollateralRoute.js";
 import { liquidatedSupplyOrWithdraw_route } from "./routes/liquidatedSupplyOrWithdrawRoute.js";
 import { absorb_route } from "./routes/absorbRoute.js";
 import { liquidatorPoints_route } from "./routes/liquidatorPointsRoute.js";
+import { updateInfo_route } from "./routes/updateUserSupplyInfo.js";
 
 const app = express();
 const port = process.env.API_PORT || 3000;
@@ -58,6 +59,7 @@ app.use("/", buyCollateral_route);
 app.use("/", liquidatedSupplyOrWithdraw_route);
 app.use("/", absorb_route);
 app.use("/", liquidatorPoints_route);
+app.use("/", updateInfo_route);
 
 // server listening
 app.listen(port, () => {
